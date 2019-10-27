@@ -1,4 +1,5 @@
 # Vault CLI
+##Work in progress
 
 A CLI for store passwords safely.
 
