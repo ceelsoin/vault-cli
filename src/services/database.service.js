@@ -46,9 +46,9 @@ function generateKeychainStorage(){
     .write();
 }
 
-function getKeyChainContent(path_, onlyKeys){
+function getKeyChainContent(path_, onlyKeys = false){
     if(!onlyKeys){
-        let content = fs.readFileSync(path, "utf8");
+        let content = fs.readFileSync(path.resolve(path_), "utf8");
         // console.log('content',content)
         return content;
     }else{
