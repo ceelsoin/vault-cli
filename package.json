@@ -1,8 +1,7 @@
 {
   "name": "vault",
   "version": "0.0.1",
-  "description": "vault CLI",
-  "private": true,
+  "description": "Vault Credentials Storage CLI",
   "bin": {
     "vault": "bin/vault"
   },

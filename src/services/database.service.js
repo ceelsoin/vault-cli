@@ -8,6 +8,8 @@ const fs = require('fs');
 
 const database = require('../models/database.model').database
 const keychain = require('../models/keychain.model').keychain
+const secretPassword = require('../models/secret-passwords.model').secretPassword
+
 const encrypt = require('./encrypt.service')
 
 const databaseStorage = new FileSync(getDatabaseLocation());
@@ -23,6 +25,7 @@ function generateDatabase(){
     db.defaults(database)
     .write()
 }
+
 function getDatabaseLocation(){
     let pathDb = path.join(homedir, `database.json`);
     return pathDb;
@@ -43,10 +46,28 @@ function generateKeychainStorage(){
     .write();
 }
 
-function getKeyChainContent(path){
-    let content = fs.readFileSync(path, "utf8");
-    // console.log('content',content)
-    return content;
+function getKeyChainContent(path_, onlyKeys){
+    if(!onlyKeys){
+        let content = fs.readFileSync(path, "utf8");
+        // console.log('content',content)
+        return content;
+    }else{
+        let content = fs.readFileSync(path.resolve(path_), "utf8");
+        // console.log('content', JSON.parse(content).keys)
+        return JSON.parse(content).keys;
+    }
+}
+
+
+function insertNewCredential(service, login, password, keys){
+    
+    secretPassword.username = login;
+    secretPassword.password = encrypt.blowEncrypt(keys[0], password);
+    secretPassword.service = service;
+    
+    db.get('secretPasswords')
+    .push(secretPassword)
+    .write()
 }
 
 module.exports = {
@@ -54,5 +75,6 @@ module.exports = {
     getDatabaseLocation,
     generateKeychainStorage,
     getKeychainLocation,
-    getKeyChainContent
+    getKeyChainContent,
+    insertNewCredential
 }

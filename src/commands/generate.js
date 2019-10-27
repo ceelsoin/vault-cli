@@ -3,9 +3,6 @@ var emoji = require('node-emoji')
 var qrcode = require('qrcode-terminal');
 var CryptoJS = require("crypto-js");
 
-
-
-
 module.exports = {
   name: 'generate',
   alias: ['g'],
