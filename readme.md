@@ -1,23 +1,14 @@
-# vault CLI
+# Vault CLI
 
-A CLI for vault.
+A CLI for store passwords safely .
 
-## Customizing your CLI
+## Get started
 
-Check out the documentation at https://github.com/infinitered/gluegun/tree/master/docs.
+`npm install -g passvault generate`
 
-## Publishing to NPM
+Then generate private keys and db start to store your passwords
 
-To package your CLI up for NPM, do this:
-
-```shell
-$ npm login
-$ npm whoami
-$ npm lint
-$ npm test
-(if typescript, run `npm run build` here)
-$ npm publish
-```
+`vault store --login myuser@account.com --password mypassword --key "C:\path\to\my\keychain.json"`
 
 # License
 
